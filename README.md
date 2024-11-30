@@ -112,6 +112,7 @@ File Structure
 ├── styles.css
 ├── dashboard.css
 └── database.sql
+
 Contributing
 Feel free to submit issues and enhancement requests.
 
