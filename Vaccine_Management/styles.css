@@ -1,0 +1,132 @@
+/* General Body Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-image: url('./bg.jpg'); /* Replace with your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Center Container Styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 400px; /* Set a max width */
+    animation: fadeIn 2s ease-in-out; /* Fade-in animation */
+}
+
+/* Stylish Heading */
+h1 {
+    margin-bottom: 20px;
+    font-size: 48px; /* Large font size */
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b, #86a8e7); /* Gradient effect */
+    -webkit-background-clip: text; /* Apply gradient only to the text */
+    -webkit-text-fill-color: transparent; /* Make rest of the background transparent */
+    text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8), 0px 0px 20px rgba(255, 122, 122, 0.8); /* Glowing effect */
+    text-transform: uppercase; /* Uppercase for emphasis */
+    letter-spacing: 3px; /* Increase letter spacing */
+    animation: glow 2s infinite alternate; /* Glowing animation */
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    animation: slideUp 1.5s ease-in-out; /* Slide-up animation for the form */
+}
+
+/* Input Fields */
+form input {
+    margin: 10px 0;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Input Hover Effect */
+form input:focus {
+    outline: none;
+    transform: scale(1.02);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Submit Button */
+form button {
+    margin: 15px 0;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #007BFF, #0056b3);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+}
+
+/* Button Hover Effect */
+form button:hover {
+    background: linear-gradient(90deg, #0056b3, #003d99);
+    transform: translateY(-3px);
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 400px) {
+    .container {
+        width: 90%;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.8),
+                    0px 0px 20px rgba(255, 122, 122, 0.8);
+    }
+    to {
+        text-shadow: 0px 0px 20px rgba(255, 255, 255, 1),
+                    0px 0px 30px rgba(255, 122, 122, 1);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

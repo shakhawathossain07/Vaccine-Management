@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <h1>Welcome to the Dashboard, <?php echo ($_SESSION['role'] === 1) ? 'Admin' : 'User'; ?>!</h1>
+    
+    <?php if ($_SESSION['role'] === 1): ?>
+        <h2>Manage Vaccines</h2>
+        <table>
+            <tr>
+                <th>Vaccine</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+            <?php foreach ($vaccines as $vaccine): ?>
+                <tr>
+                    <td><?php echo $vaccine['name']; ?></td>
+                    <td><?php 
+                        $stmt = $pdo->prepare('SELECT quantity FROM Stock_Levels WHERE vaccine_id = ?');
+                        $stmt->execute([$vaccine['vaccine_id']]);
+                        $stock = $stmt->fetchColumn();
+                        echo $stock;
+                    ?></td>
+                    <td>
+                        <form action="delete_vaccine.php" method="post" style="display:inline;">
+                            <input type="hidden" name="vaccine_id" value="<?php echo $vaccine['vaccine_id']; ?>">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <form action="edit_vaccine.php" method="get" style="display:inline;">
+                            <input type="hidden" name="vaccine_id" value="<?php echo $vaccine['vaccine_id']; ?>">
+                            <button type="submit">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        
+        <h2>Add New Vaccine</h2>
+        <form action="add_vaccine.php" method="post">
+            <label for="vaccine_name">Vaccine Name:</label>
+            <input type="text" id="vaccine_name" name="vaccine_name" required>
+            <label for="vaccine_quantity">Quantity:</label>
+            <input type="number" id="vaccine_quantity" name="vaccine_quantity" required>
+            <button type="submit">Add Vaccine</button>
+        </form>
+        
+        <h2>Manage Vaccine Batches</h2>
+        <table>
+            <tr>
+                <th>Batch Number</th>
+                <th>Vaccine</th>
+                <th>Expiration Date</th>
+                <th>Actions</th>
+            </tr>
+            <?php foreach ($batches as $batch): ?>
+                <tr>
+                    <td><?php echo $batch['batch_number']; ?></td>
+                    <td><?php 
+                        $stmt = $pdo->prepare('SELECT name FROM Vaccines WHERE vaccine_id = ?');
+                        $stmt->execute([$batch['vaccine_id']]);
+                        $vaccine_name = $stmt->fetchColumn();
+                        echo $vaccine_name;
+                    ?></td>
+                    <td><?php echo $batch['expiration_date']; ?></td>
+                    <td>
+                        <form action="delete_batch.php" method="post" style="display:inline;">
+                            <input type="hidden" name="batch_id" value="<?php echo $batch['batch_id']; ?>">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <form action="edit_batch.php" method="get" style="display:inline;">
+                            <input type="hidden" name="batch_id" value="<?php echo $batch['batch_id']; ?>">
+                            <button type="submit">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        
+        <h2>Add New Vaccine Batch</h2>
+        <form action="add_batch.php" method="post">
+            <label for="batch_number">Batch Number:</label>
+            <input type="text" id="batch_number" name="batch_number" required>
+            <label for="vaccine_id">Vaccine:</label>
+            <select id="vaccine_id" name="vaccine_id" required>
+                <?php foreach ($vaccines as $vaccine): ?>
+                    <option value="<?php echo $vaccine['vaccine_id']; ?>"><?php echo $vaccine['name']; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <label for="expiration_date">Expiration Date:</label>
+            <input type="date" id="expiration_date" name="expiration_date" required>
+            <button type="submit">Add Batch</button>
+        </form>
+        
+        <h2>Manage Appointments</h2>
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>Vaccine</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            <?php foreach ($appointments as $appointment): ?>
+                <tr>
+                    <td><?php echo $appointment['user_id']; ?></td>
+                    <td><?php 
+                        $stmt = $pdo->prepare('SELECT name FROM Vaccines WHERE vaccine_id = ?');
+                        $stmt->execute([$appointment['vaccine_id']]);
+                        $vaccine_name = $stmt->fetchColumn();
+                        echo $vaccine_name;
+                    ?></td>
+                    <td><?php echo $appointment['appointment_date']; ?></td>
+                    <td>
+                        <form action="delete_appointment.php" method="post" style="display:inline;">
+                            <input type="hidden" name="appointment_id" value="<?php echo $appointment['appointment_id']; ?>">
+                            <button type="submit">Delete</button>
+                        </form>
+                        <form action="edit_appointment.php" method="get" style="display:inline;">
+                            <input type="hidden" name="appointment_id" value="<?php echo $appointment['appointment_id']; ?>">
+                            <button type="submit">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    <?php else: ?>
+        <h2>Your Appointments</h2>
+        <table>
+            <tr>
+                <th>Vaccine</th>
+                <th>Date</th>
+            </tr>
+            <?php foreach ($appointments as $appointment): ?>
+                <tr>
+                    <td><?php 
+                        $stmt = $pdo->prepare('SELECT name FROM Vaccines WHERE vaccine_id = ?');
+                        $stmt->execute([$appointment['vaccine_id']]);
+                        $vaccine_name = $stmt->fetchColumn();
+                        echo $vaccine_name;
+                    ?></td>
+                    <td><?php echo $appointment['appointment_date']; ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+        
+        <h2>Schedule an Appointment</h2>
+        <form action="schedule.php" method="post">
+            <label for="vaccine">Vaccine:</label>
+            <select name="vaccine_id" id="vaccine">
+                <?php foreach ($vaccines as $vaccine): ?>
+                    <option value="<?php echo $vaccine['vaccine_id']; ?>"><?php echo $vaccine['name']; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <label for="date">Date:</label>
+            <input type="date" name="appointment_date" required>
+            <button type="submit">Schedule</button>
+        </form>
+    <?php endif; ?>
+    
+    <a href="logout.php" class="logout-btn">Logout</a>
+</body>
+</html>
