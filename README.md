@@ -117,7 +117,7 @@ Contributing
 Feel free to submit issues and enhancement requests.
 
 License
-This project is licensed under the Apache License.
+This project is licensed under the CC0 1.0 Universal License.
 
 Contact
 For any queries, please contact [Md. Shakhawat Hossain] at [shakhawat.hossain07.edu@gmail.com].
