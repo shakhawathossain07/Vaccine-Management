@@ -90,6 +90,7 @@ Dashboard Access: Admins can access the dashboard to manage vaccines, batches, a
 
 File Structure
 /vaccine-management-system
+
 ├── db.php
 
 ├── login.php
