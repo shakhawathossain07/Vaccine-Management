@@ -36,7 +36,7 @@ The Vaccine Management System is a web-based application designed to manage vacc
 ### Installation
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/yourusername/vaccine-management-system.git
+    git clone https://github.com/shakhawathossain07/Vaccine-Management.git
     ```
 
 2. **Start the XAMPP server** and ensure Apache and MySQL are running.
