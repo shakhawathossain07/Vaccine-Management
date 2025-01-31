@@ -91,26 +91,47 @@ Dashboard Access: Admins can access the dashboard to manage vaccines, batches, a
 File Structure
 /vaccine-management-system
 ├── db.php
+
 ├── login.php
+
 ├── register.php
+
 ├── dashboard.php
+
 ├── add_vaccine.php
+
 ├── edit_vaccine.php
+
 ├── update_vaccine.php
+
 ├── delete_vaccine.php
+
 ├── add_batch.php
+
 ├── edit_batch.php
+
 ├── update_batch.php
+
 ├── delete_batch.php
+
 ├── schedule.php
+
 ├── delete_appointment.php
+
 ├── edit_appointment.php
+
 ├── update_appointment.php
+
 ├── login.html
+
 ├── register.html
+
 ├── dashboard.html
+
 ├── styles.css
+
 ├── dashboard.css
+
 └── database.sql
 
 Contributing
